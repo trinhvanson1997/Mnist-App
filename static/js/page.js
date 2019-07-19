@@ -44,7 +44,7 @@ var onPaint = function () {
 document.getElementById('clear').addEventListener('click', function () {
     // ctx.clearRect(0, 0, canvas.width, canvas.height);
     fill_background_color();
-    $('#result').html("");
+    $('#result').html("Result:");
 });
 
 $('#predict').click(function () {
@@ -58,8 +58,12 @@ $('#predict').click(function () {
             "base_64": dataURL
         },
         success: function (res) {
+            console.log(res);
             res = JSON.parse(res);
             $('#result').html("Result: " + res['number']);
+            img = document.getElementById('img');
+            img.src = res['encode'];
+            img.src.display = 'inline';
         }
     });
 

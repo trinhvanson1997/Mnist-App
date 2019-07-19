@@ -25,10 +25,12 @@ def route():
     with open(filename, 'wb') as f:
         f.write(imgdata)
         f.close()
-    number = predict(img_path='image.jpg', checkpoint_path='mnist_cnn/checkpoint')
+    number, encode_string = predict(img_path='image.jpg', checkpoint_path='mnist_cnn/checkpoint')
+    data_send = 'data:image/jpeg;base64,' + encode_string.decode()
+
     print(number)
 
-    return json.dumps({'number': number})
+    return json.dumps({'number': number, 'encode': data_send})
 
 
 if __name__ == '__main__':
